@@ -1,0 +1,18 @@
+sudo su -
+apt-get update
+
+#setup node
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
+. ~/.nvm/nvm.sh
+nvm install node
+
+mkdir workspace
+cd workspace
+
+npm install pm2 --global
+npm install serve --global
+
+npx create-react-app sample
+cd sample
+npm run build
+pm2 serve build 80 --spa
